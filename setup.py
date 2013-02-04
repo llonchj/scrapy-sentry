@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='scrapy-sentry',
-      version='0.1',
+      version='0.2',
       description='Sentry component for Scrapy',
       long_description=open('README.md').read(),
       author='Jordi Llonch',
