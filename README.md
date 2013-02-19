@@ -8,12 +8,20 @@ Features
 
 * Allows logging of exceptions into Sentry
 
+Requisites: 
+-----------
+* [Sentry server](http://www.getsentry.com)
+
+
 Installation
 ------------
 
   ```
   pip install scrapy-sentry
   ```
+
+  It is highly recommended to use UDP as SENTRY_DSN. Read on how to setup a [UDP server for Sentry](http://sentry.readthedocs.org/en/latest/udp_server/index.html).
+
 
 Setup (Method 1)
 ----------------
@@ -49,9 +57,37 @@ Use the provided middleware in `settings.py`:
 
   ```
 
+Send signals to Sentry
+----------------------
+
+To send scrapt signals to Sentry, ensure a valid SENTRY_DSN is setup and 
+create a list with the signals to be delivered to Sentry.
+
+Use the `SENTRY_SIGNALS` in `settings.py`:
+
+  ```
+  SENTRY_SIGNALS = [
+      'engine_started',
+      'engine_stopped',
+      # 'item_dropped',
+      # 'item_passed',
+      # 'item_scraped',
+      # 'request_received',
+      # 'response_downloaded',
+      # 'response_received',
+      # 'spider_closed',
+      # 'spider_error',
+      # 'spider_idle',
+      # 'spider_opened',
+      # 'stats_spider_closed',
+      # 'stats_spider_closing',
+      # 'stats_spider_opened',
+  ]
+  ```
+
 Example Project
 ---------------
 Try the example project.
 
   ```
-  env SENTRY_DSN="" scrapy crawl example
+  env SENTRY_DSN="http://example.com/1" scrapy crawl example
