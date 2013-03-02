@@ -3,8 +3,6 @@ Send signals to Sentry
 
 Use SENTRY_DSN setting to enable sending information
 """
-import logging
-
 from scrapy import signals, log
 from scrapy.mail import MailSender
 from scrapy.exceptions import NotConfigured
