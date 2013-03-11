@@ -10,8 +10,10 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
+   troubleshoot
 
-
+:doc:`troubleshoot`
+    Instructions on how to troubleshoot scrapy-sentry.
 
 Indices and tables
 ==================
