@@ -1,1 +1,3 @@
 recursive-include example_project *.py *.cfg
+recursive-include docs *
+prune docs/_build
