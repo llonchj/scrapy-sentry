@@ -21,22 +21,15 @@ Installation
 Setup
 -----
 
-Use the provided middleware, add to your Scrapy Project `settings.py` file:
+Add `SENTRY_DSN` and `scrapy_sentry.extensions.Errors` extension to your Scrapy Project `settings.py`.
+
+Example:
 
   ```
   # sentry dsn
   SENTRY_DSN = 'http://public:secret@example.com/1'
   EXTENSIONS = {
-      #
-      # log spider_errors to sentry.
       "scrapy_sentry.extensions.Errors":10,
   }
 
   ```
-
-Example Project
----------------
-Try the example project.
-
-  ```
-  env SENTRY_DSN="http://example.com/1" scrapy crawl example
