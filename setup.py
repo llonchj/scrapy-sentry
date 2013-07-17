@@ -9,7 +9,7 @@ setup(name='scrapy-sentry',
       url='https://github.com/llonchj/scrapy-sentry',
       packages=find_packages(),
       license='BSD',
-      install_requires=['Scrapy>=0.16', 'raven'],
+      install_requires=['Scrapy>0.16', 'raven'],
       classifiers=[
             'Programming Language :: Python',
             'Programming Language :: Python :: 2.6',
