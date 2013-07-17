@@ -69,18 +69,23 @@ class Errors(object):
         o = cls(dsn=dsn)
         crawler.signals.connect(o.spider_error, signal=signals.spider_error)
         return o
-        
+
     def spider_error(self, failure, response, spider, signal=None, sender=None, *args, **kwargs):
+        import StringIO
+        traceback = StringIO.StringIO()
+        failure.printTraceback(file=traceback)
+
         message = signal
         extra = {
                 'sender': sender,
                 'spider': spider.name,
                 'signal': signal,
                 'failure': failure,
-                'response': response_to_dict(response, spider, include_request=True)
+                'response': response_to_dict(response, spider, include_request=True),
+                'traceback': "\n".join(traceback.getvalue().split("\n")[-5:]),
             }
-        msg = self.client.captureException( 
-            message=failure.getErrorMessage(), 
+        msg = self.client.captureMessage(
+            message=u"[{}] {}".format(spider.name, repr(failure.value)),
             extra=extra) #, stack=failure.stack)
             
         ident = self.client.get_ident(msg)
