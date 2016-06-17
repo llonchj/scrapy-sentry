@@ -51,8 +51,8 @@ def response_from_dict(response, spider=None, **kwargs):
     """Returns a dict based on a response from a spider"""
     url = response.get("url")
     status = response.get("status")
-    headers = Headers([(x, map(str, y)) for x, y in 
-                    response.get("headers").iteritems()])
+    headers = Headers([(x, list(map(str, y))) for x, y in
+                    response.get("headers").items()])
     body = response.get("body")
 
     respcls = responsetypes.from_args(headers=headers, url=url)

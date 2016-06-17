@@ -3,6 +3,8 @@ Send signals to Sentry
 
 Use SENTRY_DSN setting to enable sending information
 """
+from __future__ import absolute_import, unicode_literals
+
 import os
 
 from scrapy import signals, log
@@ -11,7 +13,7 @@ from scrapy.exceptions import NotConfigured
 
 from raven import Client
 
-from utils import get_client, response_to_dict
+from .utils import get_client, response_to_dict
 
 class Log(object):
     def __init__(self, dsn=None, *args, **kwargs):
@@ -71,8 +73,8 @@ class Errors(object):
         return o
 
     def spider_error(self, failure, response, spider, signal=None, sender=None, *args, **kwargs):
-        import StringIO
-        traceback = StringIO.StringIO()
+        from six import StringIO
+        traceback = StringIO()
         failure.printTraceback(file=traceback)
 
         message = signal
