@@ -6,8 +6,9 @@ Use SENTRY_DSN setting to enable sending information
 from __future__ import absolute_import, unicode_literals
 
 import os
+import logging
 
-from scrapy import signals, log
+from scrapy import signals
 from scrapy.mail import MailSender  # noqa
 from scrapy.exceptions import NotConfigured
 
@@ -96,6 +97,6 @@ class Errors(object):
         ident = self.client.get_ident(msg)
 
         l = spider.log if spider else log.msg
-        l("Sentry Exception ID '%s'" % ident, level=log.INFO)
+        l("Sentry Exception ID '%s'" % ident, level=logging.INFO)
 
         return ident
