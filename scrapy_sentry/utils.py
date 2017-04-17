@@ -4,7 +4,8 @@ import logging
 
 from twisted.python import log
 
-from scrapy.conf import settings
+# from scrapy.conf import settings
+from scrapy.utils.project import get_project_settings
 from scrapy.http import Request, Headers  # noqa
 from scrapy.utils.reqser import request_to_dict, request_from_dict  # noqa
 from scrapy.responsetypes import responsetypes
@@ -15,6 +16,7 @@ from raven.handlers.logging import SentryHandler
 
 SENTRY_DSN = os.environ.get("SENTRY_DSN", None)
 
+settings = get_project_settings()
 
 def get_client(dsn=None):
     """gets a scrapy client"""
