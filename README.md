@@ -4,6 +4,8 @@ scrapy-sentry
 Logs Scrapy exceptions into Sentry
 
 A python library that glues [Sentry](http://www.getsentry.com) with [Scrapy](http://www.scrapy.org).
+Any spider errors will get pushed to Sentry. Please note that currently, exceptions anywhere else (e.g. the Scrapy pipeline)
+are not being reported to Sentry.
 
 
 Requisites: 
@@ -33,3 +35,7 @@ Example:
   }
 
   ```
+
+Supported versions
+------------------
+This package works with Python 2.7, 3.4 and 3.5. It has been tested with Scrapy up to version 1.2.1.  
