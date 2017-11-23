@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
  
-from scrapy.spider import BaseSpider
+from scrapy import Spider
 
-class NitidumSpider(BaseSpider):
+class NitidumSpider(Spider):
 
     name = 'example'
     allowed_domains = ['localhost']
