@@ -30,8 +30,7 @@ class SentryMiddleware(object):
             exc_info=sys.exc_info(), extra=extra)
         ident = self.client.get_ident(msg)
 
-        l = spider.log if spider else log.msg
-        l("Sentry Exception ID '%s'" % ident, level=logging.INFO)
+        logging.log(logging.INFO, "Sentry Exception ID '%s'" % ident)
 
         return None
 

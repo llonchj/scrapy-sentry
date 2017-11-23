@@ -12,13 +12,15 @@ from scrapy.responsetypes import responsetypes
 from raven import Client
 from raven.conf import setup_logging
 from raven.handlers.logging import SentryHandler
+from raven.transport.requests import RequestsHTTPTransport
 
 SENTRY_DSN = os.environ.get("SENTRY_DSN", None)
 
 
 def get_client(dsn=None):
     """gets a scrapy client"""
-    return Client(dsn or settings.get("SENTRY_DSN", SENTRY_DSN))
+    return Client(dsn or settings.get("SENTRY_DSN", SENTRY_DSN),
+                  transport=RequestsHTTPTransport)
 
 
 def init(dsn=None):
@@ -44,7 +46,7 @@ def response_to_dict(response, spider, include_request=True, **kwargs):
         'url': response.url,
         'headers': dict(response.headers),
         'body': response.body,
-      }
+    }
     if include_request:
         d['request'] = request_to_dict(response.request, spider)
     return d

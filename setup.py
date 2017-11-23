@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='scrapy-sentry',
-    version='0.7.0',
+    version_format='{tag}.dev{commitcount}+{gitsha}',
     description='Sentry component for Scrapy',
     long_description=open('README.md').read(),
     author='Jordi Llonch',
@@ -10,7 +10,8 @@ setup(
     url='https://github.com/llonchj/scrapy-sentry',
     packages=find_packages(),
     license='BSD',
-    install_requires=['Scrapy>0.16', 'raven', 'six'],
+    install_requires=['Scrapy>=1.4.0', 'raven>=6.3.0', 'six>=1.11.0'],
+    setup_requires=['setuptools-git-version'],
     tests_require=[
         'pytest-flakes',
         'pytest-pep8',
