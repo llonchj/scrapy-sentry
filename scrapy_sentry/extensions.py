@@ -14,7 +14,7 @@ from scrapy.exceptions import NotConfigured
 from six import StringIO
 
 
-from .utils import init, get_client, response_to_dict
+from .utils import init, get_client, get_release, response_to_dict
 
 
 class Log(object):
@@ -63,15 +63,17 @@ class Signals(object):
 
 class Errors(object):
     def __init__(self, dsn=None, client=None, **kwargs):
-        self.client = client if client else get_client(dsn)
+        self.client = client if client else get_client(dsn, **kwargs)
 
     @classmethod
     def from_crawler(cls, crawler, client=None, dsn=None):
+        release = crawler.settings.get("RELEASE", get_release(crawler))
+
         dsn = os.environ.get(
             "SENTRY_DSN", crawler.settings.get("SENTRY_DSN", None))
         if dsn is None:
             raise NotConfigured('No SENTRY_DSN configured')
-        o = cls(dsn=dsn)
+        o = cls(dsn=dsn, release=release)
         crawler.signals.connect(o.spider_error, signal=signals.spider_error)
         return o
 

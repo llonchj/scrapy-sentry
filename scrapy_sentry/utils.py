@@ -2,6 +2,9 @@ import os
 import time
 import logging
 
+import inspect
+import pkg_resources
+
 from twisted.python import log
 
 from scrapy.conf import settings
@@ -17,10 +20,20 @@ from raven.transport.requests import RequestsHTTPTransport
 SENTRY_DSN = os.environ.get("SENTRY_DSN", None)
 
 
-def get_client(dsn=None):
+def get_client(dsn=None, **options):
     """gets a scrapy client"""
     return Client(dsn or settings.get("SENTRY_DSN", SENTRY_DSN),
-                  transport=RequestsHTTPTransport)
+                  transport=RequestsHTTPTransport, **options)
+
+
+def get_release(crawler):
+    """gets the release from a given crawler"""
+    try:
+        mod = inspect.getmodule(crawler.spidercls)
+        pkg = mod.__package__.replace(".", "-")
+        return pkg_resources.get_distribution(pkg).version
+    except Exception:
+        return None
 
 
 def init(dsn=None):
