@@ -10,7 +10,7 @@ setup(
     url='https://github.com/llonchj/scrapy-sentry',
     packages=find_packages(),
     license='BSD',
-    install_requires=['Scrapy>=1.4.0', 'raven>=6.3.0', 'six>=1.11.0'],
+    install_requires=['Scrapy>=2.6.0', 'raven>=6.3.0', 'six>=1.11.0'],
     setup_requires=['setuptools-git-version'],
     tests_require=[
         'pytest-flakes',
